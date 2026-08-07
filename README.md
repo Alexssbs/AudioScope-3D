@@ -10,8 +10,6 @@ Aplicación web de análisis de audio con visualizaciones 3D interactivas, métr
 
 **🔗 URL:** [https://tu-app.streamlit.app](https://audioscope-3d-nxdpbza9heatv2bt5ndqjz.streamlit.app/)
 
-> *Reemplaza la URL anterior con el enlace de tu aplicación desplegada.*
-
 ---
 
 ## 📋 Tabla de Contenidos
