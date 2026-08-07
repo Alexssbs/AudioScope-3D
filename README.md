@@ -1,107 +1,324 @@
-# AudioScope 3D
+# 🎧 AudioScope 3D
 
-Aplicación web de análisis de audio construida con Streamlit. Reutiliza una cadena DSP clásica —normalización, ventana Hann, FFT y magnitud en dB— y la adapta a una interfaz interactiva con Plotly. La IA no procesa archivos de audio: solo interpreta el resumen de métricas generado localmente.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tu-app.streamlit.app)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Funcionalidades
+Aplicación web de análisis de audio con visualizaciones 3D interactivas, métricas DSP y asistente de IA con Llama 3.1.
 
-- Carga de WAV, MP3, FLAC, OGG y M4A, con reproductor web e información técnica.
-- Forma de onda navegable, FFT, espectrograma 2D y superficie 3D interactiva.
-- RMS, energía, ZCR, centroide espectral, frecuencia dominante, pico y estimación de silencios.
-- Comparación de dos audios mediante tabla de diferencias y radar normalizado.
-- Exportación de resultados a JSON, CSV y Excel; las figuras Plotly pueden guardarse como imagen desde su barra de herramientas.
-- Asistente opcional con Meta-Llama-3.1-8B-Instruct, limitado al resumen estructurado de resultados.
+## 🌐 Demo en Producción
 
-## Tecnologías
+**🔗 URL:** [https://tu-app.streamlit.app](https://tu-app.streamlit.app)
 
-Python, Streamlit, Plotly, Librosa, NumPy, SciPy, Pandas, SoundFile y Hugging Face Inference API.
+> *Reemplaza la URL anterior con el enlace de tu aplicación desplegada.*
 
-El archivo `runtime.txt` fija Python 3.12 para el despliegue en Streamlit Community Cloud, compatible con las dependencias científicas del proyecto.
+---
 
-## Instalación y ejecución local
+## 📋 Tabla de Contenidos
 
+- [Características](#-características)
+- [Tecnologías](#-tecnologías)
+- [Instalación Local](#-instalación-local)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Uso](#-uso)
+- [Configuración de IA](#-configuración-de-ia)
+- [Despliegue](#-despliegue)
+- [Capturas de Pantalla](#-capturas-de-pantalla)
+- [Contribuciones](#-contribuciones)
+- [Licencia](#-licencia)
+
+---
+
+## ✨ Características
+
+### 📊 Análisis DSP
+- **Forma de onda** interactiva con zoom y paneo
+- **Espectro FFT** con visualización en tiempo real
+- **Espectrograma 2D** y **3D** con mapa de colores personalizable
+- **Métricas avanzadas**: RMS, energía, centroide espectral, frecuencia dominante, ZCR, silencio y pico
+
+### 🔀 Comparación
+- Comparación lado a lado de dos archivos de audio
+- Tabla de diferencias con métricas clave
+- Radar comparativo normalizado
+
+### 🎵 Visualización en Tiempo Real (Simulada)
+- Navegación por segmentos del audio
+- Forma de onda y espectro actualizados dinámicamente
+- Espectrograma 3D con marcador de posición
+
+### 🤖 Asistente de IA
+- Interpretación en lenguaje natural de los resultados
+- **Llama 3.1 8B** vía Hugging Face Inference API
+- **Seguridad**: La IA solo recibe métricas, nunca el audio crudo
+
+### 💾 Exportación
+- JSON (estructura completa)
+- CSV (tabla plana)
+- Excel (.xlsx) con formato profesional
+
+### 🎨 Personalización
+- **Temas claro/oscuro** con un solo clic
+- Parámetros ajustables: tamaño FFT, ventana, frecuencia máxima
+- Mapas de colores para espectrogramas
+
+---
+
+## 🛠️ Tecnologías
+
+| Tecnología | Uso |
+|------------|-----|
+| **Streamlit** | Framework web e interfaz de usuario |
+| **Plotly** | Visualizaciones interactivas (2D y 3D) |
+| **Librosa** | Procesamiento de audio y extracción de características |
+| **NumPy/SciPy** | Cálculos numéricos y FFT |
+| **Pandas** | Manipulación de datos |
+| **SoundFile** | Lectura de archivos de audio |
+| **Hugging Face Hub** | Inferencia de modelos de IA |
+| **OpenPyXL** | Exportación a Excel |
+
+---
+
+## 📦 Instalación Local
+
+### Requisitos previos
+- Python 3.12 o superior
+- Git
+
+### Pasos
+
+1. **Clonar el repositorio**
 ```bash
-git clone <tu-repositorio>
+git clone https://github.com/tu-usuario/AudioScope3D.git
 cd AudioScope3D
-python -m venv .venv
+```
+
+2. **Crear y activar entorno virtual**
+```bash
 # Windows
+python -m venv .venv
 .venv\Scripts\activate
+
 # macOS/Linux
+python3 -m venv .venv
 source .venv/bin/activate
+```
+
+3. **Instalar dependencias**
+```bash
 pip install -r requirements.txt
+```
+
+4. **Configurar secrets (opcional - para IA)**
+Crear el archivo `.streamlit/secrets.toml`:
+```toml
+HUGGINGFACE_TOKEN = "hf_tu_token_aqui"
+```
+
+> **Obtén tu token:** [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+
+5. **Ejecutar la aplicación**
+```bash
 streamlit run app.py
 ```
 
-La aplicación estará disponible normalmente en `http://localhost:8501`.
+6. **Abrir en el navegador**
+La aplicación estará disponible en `http://localhost:8501`
 
-## Uso
+---
 
-1. Carga el audio principal desde la barra lateral.
-2. Ajusta tamaño FFT, frecuencia máxima, ventana y mapa de color.
-3. Explora las pestañas de resumen, espectro y características.
-4. En **Comparar**, carga un segundo audio para obtener diferencias y radar.
-5. Descarga resultados en **Exportar**. Para imágenes, usa el icono de cámara de cada gráfica Plotly.
+## 📁 Estructura del Proyecto
 
-Los audios de demostración no se incluyen. Copia tus archivos en `assets/`; consulta [assets/README.md](assets/README.md) para los nombres sugeridos y comentarios de reemplazo.
-
-## Estructura
-
-```text
+```
 AudioScope3D/
-├── app.py
-├── requirements.txt
-├── .gitignore
-├── assets/                 # Audios locales opcionales (ignorados por Git)
-├── data/
-└── modules/
-    ├── audio_loader.py     # Decodificación y metadatos
-    ├── fft_analysis.py     # FFT original refactorizada
-    ├── spectrogram.py      # STFT/espectrogramas
-    ├── audio_features.py   # Métricas DSP
-    ├── visualization.py    # Figuras Plotly
-    ├── comparison.py
-    ├── export.py
-    └── ai_summary.py       # Solo interpretación de resultados
+├── app.py                      # Punto de entrada principal
+├── requirements.txt            # Dependencias
+├── runtime.txt                 # Versión de Python para Cloud
+├── README.md                   # Documentación
+├── .gitignore                  # Archivos ignorados por Git
+│
+├── .streamlit/
+│   └── secrets.toml           # Secrets (NO subir a Git)
+│
+├── modules/
+│   ├── __init__.py
+│   ├── ai_summary.py          # Integración con Hugging Face
+│   ├── audio_features.py      # Extracción de métricas DSP
+│   ├── audio_loader.py        # Carga y decodificación
+│   ├── comparison.py          # Comparación de audios
+│   ├── export.py              # Exportación a JSON/CSV/Excel
+│   ├── fft_analysis.py        # Cálculo de FFT
+│   ├── spectrogram.py         # Generación de espectrogramas
+│   └── visualization.py       # Figuras Plotly
+│
+├── assets/                     # Audios de demostración (ignorados)
+│   ├── README.md              # Instrucciones para audios
+│   └── .gitkeep
+│
+└── data/                       # Datos generados (ignorados)
+    └── .gitkeep
 ```
 
-## Hugging Face Secrets
+---
 
-La función de IA es opcional. El token nunca se escribe en el código ni debe subirse a Git.
+## 🚀 Uso
 
-### Desarrollo local
+### Carga de audio
+1. En la barra lateral, selecciona "Subir archivo" o "Audio de demostración"
+2. Si usas demostración, selecciona un archivo de `assets/`
+3. O sube tu propio archivo (soporta MP3, WAV, FLAC, OGG, M4A)
 
-Crea `.streamlit/secrets.toml` (está ignorado por Git) con:
+### Análisis
+- Ajusta los parámetros en la barra lateral (FFT, frecuencia, ventana)
+- Los gráficos se actualizan automáticamente
 
+### Pestañas disponibles
+- **📋 Resumen**: Información del audio y forma de onda
+- **📈 Espectro**: FFT y espectrogramas 2D/3D
+- **🎵 Tiempo Real**: Navegación interactiva por segmentos
+- **📊 Características**: Métricas DSP detalladas
+- **🔀 Comparar**: Compara dos archivos de audio
+- **💾 Exportar**: Descarga resultados en múltiples formatos
+- **🤖 IA**: Asistente con Llama 3.1
+
+### Atajos de Plotly
+- **Zoom**: Rueda del mouse
+- **Pan**: Arrastrar
+- **Rotación** (3D): Arrastrar con clic
+- **Exportar imagen**: Botón de cámara en la barra de herramientas
+
+---
+
+## 🔑 Configuración de IA
+
+### Desarrollo Local
+Crear `.streamlit/secrets.toml`:
 ```toml
-HUGGINGFACE_TOKEN="colocar_aqui_tu_token"
+HUGGINGFACE_TOKEN = "hf_tu_token_aqui"
 ```
 
-### Repositorio GitHub
-
-No subas `secrets.toml`, `.env` ni el token. El `.gitignore` del proyecto ya excluye esos secretos. Comparte solo el código y configura el secreto por entorno.
-
-### Streamlit Community Cloud
-
-En la configuración de la aplicación, abre **Secrets** y agrega:
-
+### Streamlit Cloud
+1. Ve a la configuración de tu app
+2. En **Secrets**, agrega:
 ```toml
-HUGGINGFACE_TOKEN="colocar_aqui_tu_token"
+HUGGINGFACE_TOKEN = "hf_tu_token_aqui"
 ```
 
-Después guarda y reinicia la aplicación. No es necesario modificar el código para desplegarla.
+### Modelo usado
+- **Meta Llama 3.1 8B** (`meta-llama/Meta-Llama-3.1-8B-Instruct`)
+- La IA solo recibe métricas, no el audio crudo
 
-## Despliegue en Streamlit Community Cloud
+---
 
-1. Sube este proyecto a GitHub, sin audios privados ni secretos.
-2. En [Streamlit Community Cloud](https://share.streamlit.io/), crea una aplicación desde el repositorio.
-3. Selecciona `app.py` como archivo principal.
-4. Añade `HUGGINGFACE_TOKEN` en **Secrets** solo si deseas habilitar la pestaña IA.
+## 🌐 Despliegue
 
-## Capturas
+### Opción 1: Streamlit Community Cloud (Recomendado)
 
-_Agrega aquí una captura del panel principal._
+1. Sube el proyecto a GitHub
+2. Ve a [Streamlit Cloud](https://share.streamlit.io/)
+3. Conecta tu repositorio
+4. Selecciona `app.py` como archivo principal
+5. Configura el secret `HUGGINGFACE_TOKEN`
+6. Haz clic en **Deploy**
 
-_Agrega aquí una captura del espectrograma 3D._
+### Opción 2: Render.com
 
-## Notas de diseño
+```bash
+# Crear archivo render.yaml
+services:
+  - type: web
+    name: AudioScope3D
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT
+    envVars:
+      - key: HUGGINGFACE_TOKEN
+        sync: false
+```
 
-El prototipo original reproducía audio mediante `sounddevice` y actualizaba una animación Matplotlib por bloques. En una app web, el navegador reproduce el archivo y Plotly aporta zoom, paneo, rotación y exportación de imagen; así se conserva la lógica FFT/DSP, eliminando dependencias de audio de escritorio que no funcionan en Streamlit Cloud. Para análisis de archivos extensos, el espectrograma 3D se reduce antes de dibujarse para mantener la interfaz fluida.
+### Opción 3: Docker
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8501
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+```
+
+---
+
+## 📸 Capturas de Pantalla
+
+### Panel Principal
+![Panel Principal](https://via.placeholder.com/800x400?text=AudioScope+3D+-+Panel+Principal)
+
+### Espectrograma 3D
+![Espectrograma 3D](https://via.placeholder.com/800x400?text=Espectrograma+3D+Interactivo)
+
+### Comparación de Audios
+![Comparación](https://via.placeholder.com/800x400?text=Comparación+de+Audios)
+
+> *Reemplaza los placeholders con capturas reales de tu aplicación*
+
+---
+
+## 🧪 Pruebas
+
+### Probar la conexión con Hugging Face
+```bash
+python test_llama.py
+```
+
+### Probar componentes individuales
+```bash
+# Probar carga de audio
+python -c "from modules.audio_loader import load_audio; print('OK')"
+
+# Probar extracción de características
+python -c "from modules.audio_features import extract_features; print('OK')"
+```
+
+---
+
+## 📝 Notas de Diseño
+
+- **Seguridad**: El audio nunca se envía a la IA, solo las métricas
+- **Rendimiento**: Los datos se reducen automáticamente para visualización
+- **Compatibilidad**: Soporta archivos de hasta 200MB
+- **Responsive**: Diseño adaptado a diferentes tamaños de pantalla
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Distribuido bajo la Licencia MIT. Ver `LICENSE` para más información.
+
+---
+
+**⭐ Si te gusta este proyecto, no olvides darle una estrella en GitHub!**
+
+## 🔧 Cómo personalizar el README
+
+### 1. URL de producción
+Reemplaza `https://tu-app.streamlit.app` con tu URL real después del despliegue.
+
+### 2. Capturas de pantalla
+Reemplaza los placeholders de imágenes con capturas reales:
+```markdown
+![Panel Principal](ruta/a/tu/imagen.png)
+```
