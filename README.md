@@ -8,7 +8,7 @@ Aplicación web de análisis de audio con visualizaciones 3D interactivas, métr
 
 ## 🌐 Demo en Producción
 
-**🔗 URL:** [https://tu-app.streamlit.app](https://tu-app.streamlit.app)
+**🔗 URL:** [https://tu-app.streamlit.app](https://audioscope-3d-nxdpbza9heatv2bt5ndqjz.streamlit.app/)
 
 > *Reemplaza la URL anterior con el enlace de tu aplicación desplegada.*
 
@@ -247,22 +247,6 @@ COPY . .
 EXPOSE 8501
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
-
----
-
-## 📸 Capturas de Pantalla
-
-### Panel Principal
-![Panel Principal](https://via.placeholder.com/800x400?text=AudioScope+3D+-+Panel+Principal)
-
-### Espectrograma 3D
-![Espectrograma 3D](https://via.placeholder.com/800x400?text=Espectrograma+3D+Interactivo)
-
-### Comparación de Audios
-![Comparación](https://via.placeholder.com/800x400?text=Comparación+de+Audios)
-
-> *Reemplaza los placeholders con capturas reales de tu aplicación*
-
 ---
 
 ## 🧪 Pruebas
