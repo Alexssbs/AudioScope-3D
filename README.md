@@ -298,9 +298,3 @@ Distribuido bajo la Licencia MIT. Ver `LICENSE` para más información.
 
 ### 1. URL de producción
 Reemplaza `https://tu-app.streamlit.app` con tu URL real después del despliegue.
-
-### 2. Capturas de pantalla
-Reemplaza los placeholders de imágenes con capturas reales:
-```markdown
-![Panel Principal](ruta/a/tu/imagen.png)
-```
